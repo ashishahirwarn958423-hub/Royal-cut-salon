@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>रॉयल कट सैलून | Royal Cut Salon</title>
+  
+  <style>
+    /* CSS STYLES */
+    :root {
+      --primary-color: #d4af37; /* गोल्ड थीम */
+      --dark-bg: #121212;
+      --card-bg: #1e1e1e;
+      --text-color: #ffffff;
+      --text-muted: #b0b0b0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(18, 18, 18, 0.95);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    .section {
+      padding: 90px 5% 50px 5%;
+      min-height: 100vh;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--primary-color);
+      margin: 8px auto 0 auto;
+    }
+
+    /* SECTION 1: HOME PAGE */
+    #home {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    #home h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+    }
+
+    #home p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: #000;
+      padding: 12px 30px;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #fff;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-top: 50px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .feature-card {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      width: 250px;
+      border: 1px solid #333;
+    }
+
+    /* SECTION 2: SERVICES & PRICING */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .service-info {
+      padding: 20px;
+    }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .service-name {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .service-price {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .service-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* SECTION 3: GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      width: 100%;
+      padding: 8px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    /* SECTION 4: BOOKING & CONTACT */
+    .booking-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .booking-form {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      border: 1px solid #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .contact-info {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+    }
+
+    .info-item {
+      margin-bottom: 20px;
+    }
+
+    .info-item h4 {
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+      }
+      nav ul {
+        margin-top: 10px;
+      }
+      #home h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION BAR -->
+  <header>
+    <div class="logo">✂️ रॉयल कट सैलून</div>
+    <nav>
+      <ul>
+        <li><a href="#home">होम</a></li>
+        <li><a href="#services">सर्विसेज व रेट</a></li>
+        <li><a href="#gallery">गैलरी</a></li>
+        <li><a href="#booking">बुकिंग व संपर्क</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- PAGE 1: HOME PAGE -->
+  <section id="home" class="section">
+    <h1>गंज बासौदा का आधुनिक सैलून</h1>
+    <p>बिना इंतज़ार किए पाएं अपना पसंदीदा हेयर स्टाइल। ऑनलाइन स्लॉट बुक करें और सीधा अपनी बारी पर पहुँचें।</p>
+    <a href="#booking" class="btn">अभी स्लॉट बुक करें</a>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>⏱️ शून्य इंतज़ार</h3>
+        <p>बुक किए गए समय पर सीधी एंट्री, दुकान पर फालतू बैठना बंद।</p>
+      </div>
+      <div class="feature-card">
+        <h3>✂️ एक्सपर्ट स्टाइलिस</h3>
+        <p>हर प्रकार की ट्रेंडी कटिंग और बियर्ड शेपिंग के विशेषज्ञ।</p>
+      </div>
+      <div class="feature-card">
+        <h3>🧼 पूर्ण हाइजीन</h3>
+        <p>साफ़ टॉवल, सैनिटाइज्ड औजार और AC वेटिंग लाउंज।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 2: SERVICES & PRICING PAGE -->
+  <section id="services" class="section">
+    <h2 class="section-title">हमारी सर्विसेज और रेट</h2>
+    
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=500&q=80" alt="Haircut">
+        <div class="service-info">
+          <div class="service-header">
+            <span class="service-name">ट्रेंडी हेयरकट</span>
+            <span class="service-price">₹100</span>
+          </div>
+          <p class="service-desc">आपकी पसंद की स्टाइलिंग + हेयर वॉश और हेड मसाज शामिल। (20 मिनट)</p>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=500&q=80" alt="Beard Shaping">
+        <div class="service-info">
+          <div class="service-header">
+            <span class="service-name">बियर्ड सेट व ट्रिम</span>
+            <span class="service-price">₹50</span>
+          </div>
+          <p class="service-desc">शार्प लाइनिंग बियर्ड कट, हॉट टॉवल ट्रीटमेंट के साथ। (15 मिनट)</p>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1512290900673-7002fffe935a?auto=format&fit=crop&w=500&q=80" alt="Facial">
+        <div class="service-info">
+          <div class="service-header">
+            <span class="service-name">गोल्ड फेशियल व डिटैन</span>
+            <span class="service-price">₹250</span>
+          </div>
+          <p class="service-desc">चेहरे की डीप क्लीनिंग, डार्क स्पॉट्स हटाने के लिए बेस्ट ग्लो फेशियल। (30 मिनट)</p>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=500&q=80" alt="Combo Pack">
+        <div class="service-info">
+          <div class="service-header">
+            <span class="service-name">रॉयल कॉम्बो (All-in-One)</span>
+            <span class="service-price">₹350</span>
+          </div>
+          <p class="service-desc">हेयरकट + बियर्ड + फेशियल + हेयर स्पा पैकेज। (60 मिनट)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: GALLERY PAGE -->
+  <section id="gallery" class="section">
+    <h2 class="section-title">गैलरी (हमारा काम)</h2>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=500&q=80" alt="Fade Cut">
+        <div class="gallery-caption">स्किन फेडेड स्टाइल</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=500&q=80" alt="Beard Design">
+        <div class="gallery-caption">शार्प बियर्ड शेप</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="Salon Interior">
+        <div class="gallery-caption">सैलून का अंदर का माहौल</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=500&q=80" alt="Hair Treatment">
+        <div class="gallery-caption">हेयर ट्रीटमेंट व स्पा</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4: BOOKING & CONTACT PAGE -->
+  <section id="booking" class="section">
+    <h2 class="section-title">ऑनलाइन बुकिंग व संपर्क</h2>
+
+    <div class="booking-container">
+      <!-- Appointment Form -->
+      <form class="booking-form" id="appointmentForm">
+        <h3 style="margin-bottom: 15px; color: var(--primary-color);">समय बुक करें</h3>
+        
+        <div class="form-group">
+          <label for="name">आपका नाम:</label>
+          <input type="text" id="name" placeholder="नाम लिखें" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">मोबाइल नंबर:</label>
+          <input type="tel" id="phone" placeholder="10 अंकों का नंबर" required>
+        </div>
+
+        <div class="form-group">
+          <label for="service">सर्विस चुनें:</label>
+          <select id="service">
+            <option value="Haircut">ट्रेंडी हेयरकट (₹100)</option>
+            <option value="Beard">बियर्ड सेट व ट्रिम (₹50)</option>
+            <option value="Facial">गोल्ड फेशियल (₹250)</option>
+            <option value="Combo">रॉयल कॉम्बो (₹350)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="date">तारीख चुनें:</label>
+          <input type="date" id="date" required>
+        </div>
+
+        <div class="form-group">
+          <label for="time">टाइम स्लॉट चुनें:</label>
+          <select id="time">
+            <option value="10:00 AM">10:00 AM - 10:30 AM</option>
+            <option value="11:00 AM">11:00 AM - 11:30 AM</option>
+            <option value="04:00 PM">04:00 PM - 04:30 PM</option>
+            <option value="05:00 PM">05:00 PM - 05:30 PM</option>
+            <option value="06:00 PM">06:00 PM - 06:30 PM</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%;">कंफर्म बुकिंग</button>
+      </form>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="info-item">
+          <h4>📍 पता:</h4>
+          <p>बरेठ रोड, भारत माता स्कूल के पास, गंज बासौदा (म.प्र.)</p>
+        </div>
+
+        <div class="info-item">
+          <h4>⏰ दुकान की टाइमिंग:</h4>
+          <p>सोमवार - रविवार: सुबह 9:00 AM से रात 8:30 PM</p>
+          <p style="color: #ff5555;">(मंगलवार हाफ-डे: दोपहर 2:00 बजे तक)</p>
+        </div>
+
+        <div class="info-item">
+          <h4>📞 संपर्क:</h4>
+          <p>फ़ोन: +91 98765 43210</p>
+          <p>व्हाट्सएप: +91 98765 43210</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JAVASCRIPT CODE -->
+  <script>
+    // 1. फॉर्म सबमिशन को हैंडल करना और WhatsApp पर मैसेज भेजना
+    document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // इनपुट वैल्यू लेना
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const service = document.getElementById('service').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      // दुकान का व्हाट्सएप नंबर (यहाँ अपना नंबर डालें)
+      const salonWhatsAppNumber = "919876543210"; 
+
+      // व्हाट्सएप पर भेजने वाला मैसेज टेक्स्ट
+      const message = `नमस्ते! नई ऑनलाइन बुकिंग आई है:%0A` +
+                      `👤 नाम: ${name}%0A` +
+                      `📞 फोन: ${phone}%0A` +
+                      `✂️ सर्विस: ${service}%0A` +
+                      `📅 तारीख: ${date}%0A` +
+                      `⏰ समय: ${time}`;
+
+      // व्हाट्सएप लिंक जनरेट करना
+      const whatsappURL = `https://wa.me/${salonWhatsAppNumber}?text=${message}`;
+
+      // यूजर को अलर्ट दिखाना और व्हाट्सएप पर रिडायरेक्ट करना
+      alert('धन्यवाद! आपकी बुकिंग का विवरण व्हाट्सएप पर भेजा जा रहा है।');
+      window.open(whatsappURL, '_blank');
+    });
+
+    // 2. आज की तारीख से पुरानी तारीख सेलेक्ट न होने देना
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  </script>
+
+</body>
+</html>
