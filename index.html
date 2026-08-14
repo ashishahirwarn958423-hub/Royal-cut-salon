@@ -517,41 +517,80 @@
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
   </script>
-
-<!-- ================= डार्क / लाइट मोड कोड ================= -->
+<!-- ================= संपूर्ण डार्क / लाइट मोड कोड ================= -->
 <style>
-  /* लाइट मोड के कलर्स */
+  /* पूरे पेज का बैकग्राउंड और टेक्स्ट */
   body.light-mode {
-    background-color: #ffffff !important;
-    color: #1a1a1a !important;
+    background-color: #f4f6f9 !important;
+    color: #111111 !important;
   }
-  body.light-mode .card,
+
+  /* सेक्शन्स, हेडर, नेविगेशन, फूटर */
+  body.light-mode header,
+  body.light-mode nav,
   body.light-mode section,
+  body.light-mode footer,
   body.light-mode div {
-    background-color: #f8f9fa !important;
-    color: #1a1a1a !important;
+    background-color: #ffffff !important;
   }
-  /* बटन की स्टाइल (स्क्रीन के ऊपर दाएं कोने में दिखेगा) */
+
+  /* कार्ड्स और बॉक्सेस */
+  body.light-mode .card,
+  body.light-mode .service-card,
+  body.light-mode .feature-card,
+  body.light-mode [class*="card"],
+  body.light-mode [class*="box"] {
+    background-color: #f8f9fa !important;
+    border-color: #dddddd !important;
+  }
+
+  /* सभी प्रकार का टेक्स्ट (हेडिंग, पैराग्राफ, लेबल्स) */
+  body.light-mode h1,
+  body.light-mode h2,
+  body.light-mode h3,
+  body.light-mode h4,
+  body.light-mode h5,
+  body.light-mode h6,
+  body.light-mode p,
+  body.light-mode span,
+  body.light-mode a,
+  body.light-mode label,
+  body.light-mode li {
+    color: #111111 !important;
+  }
+
+  /* फॉर्म, इनपुट बॉक्स, सेलेक्ट बॉक्स */
+  body.light-mode input,
+  body.light-mode select,
+  body.light-mode textarea {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid #cccccc !important;
+  }
+
+  /* मोड बटन की स्टाइल */
   .theme-toggle-btn {
     position: fixed;
     top: 15px;
     right: 15px;
-    z-index: 9999;
-    padding: 8px 14px;
+    z-index: 99999;
+    padding: 8px 16px;
     cursor: pointer;
     border-radius: 20px;
-    border: 1px solid #e0b973;
-    background: #222222;
+    border: 2px solid #e0b973;
+    background: #111111;
     color: #ffffff;
-    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
+
   body.light-mode .theme-toggle-btn {
-    background: #ffffff;
-    color: #222222;
+    background: #ffffff !important;
+    color: #111111 !important;
   }
 </style>
 
-<!-- बटन -->
+<!-- टॉगल बटन -->
 <button class="theme-toggle-btn" onclick="toggleTheme()">🌙 / ☀️ मोड</button>
 
 <!-- जावास्क्रिप्ट लॉजिक -->
