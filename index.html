@@ -6,13 +6,31 @@
   <title>रॉयल कट सैलून | Royal Cut Salon</title>
   
   <style>
-    /* CSS STYLES */
+    /* =========================================
+       1. CSS VARIABLES (DARK & LIGHT THEMES)
+       ========================================= */
     :root {
       --primary-color: #d4af37; /* गोल्ड थीम */
-      --dark-bg: #121212;
+      --bg-color: #121212;
+      --header-bg: rgba(18, 18, 18, 0.95);
       --card-bg: #1e1e1e;
       --text-color: #ffffff;
       --text-muted: #b0b0b0;
+      --border-color: #333333;
+      --input-bg: #222222;
+      --input-border: #444444;
+    }
+
+    /* लाइट मोड थीम सेटिंग्स */
+    body.light-mode {
+      --bg-color: #f4f6f9;
+      --header-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: #ffffff;
+      --text-color: #1a1a1a;
+      --text-muted: #555555;
+      --border-color: #e0e0e0;
+      --input-bg: #ffffff;
+      --input-border: #cccccc;
     }
 
     * {
@@ -24,9 +42,10 @@
     }
 
     body {
-      background-color: var(--dark-bg);
+      background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     /* Header & Navigation */
@@ -34,19 +53,26 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: rgba(18, 18, 18, 0.95);
-      padding: 15px 5%;
+      background-color: var(--header-bg);
+      padding: 12px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.3s, border-color 0.3s;
     }
 
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: bold;
       color: var(--primary-color);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
     nav ul {
@@ -55,18 +81,43 @@
     }
 
     nav ul li {
-      margin-left: 20px;
+      margin-left: 15px;
     }
 
     nav ul li a {
       color: var(--text-color);
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.95rem;
       transition: 0.3s;
     }
 
     nav ul li a:hover {
       color: var(--primary-color);
+    }
+
+    /* नेवबार कंट्रोल बटन (छोटा साइज) */
+    .nav-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      background-color: transparent;
+      color: var(--text-color);
+      border: 1px solid var(--primary-color);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--primary-color);
+      color: #000;
     }
 
     .section {
@@ -101,6 +152,7 @@
       background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80');
       background-size: cover;
       background-position: center;
+      color: #ffffff;
     }
 
     #home h1 {
@@ -110,7 +162,7 @@
 
     #home p {
       font-size: 1.2rem;
-      color: var(--text-muted);
+      color: #e0e0e0;
       max-width: 600px;
       margin-bottom: 25px;
     }
@@ -146,7 +198,17 @@
       padding: 20px;
       border-radius: 8px;
       width: 250px;
-      border: 1px solid #333;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+
+    .feature-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: var(--text-muted) !important;
     }
 
     /* SECTION 2: SERVICES & PRICING */
@@ -160,7 +222,7 @@
       background-color: var(--card-bg);
       border-radius: 8px;
       overflow: hidden;
-      border: 1px solid #333;
+      border: 1px solid var(--border-color);
     }
 
     .service-card img {
@@ -182,6 +244,7 @@
     .service-name {
       font-weight: bold;
       font-size: 1.1rem;
+      color: var(--text-color);
     }
 
     .service-price {
@@ -221,7 +284,8 @@
     .gallery-caption {
       position: absolute;
       bottom: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
+      color: #ffffff;
       width: 100%;
       padding: 8px;
       text-align: center;
@@ -243,7 +307,7 @@
       flex: 1;
       min-width: 300px;
       max-width: 500px;
-      border: 1px solid #333;
+      border: 1px solid var(--border-color);
     }
 
     .form-group {
@@ -260,9 +324,9 @@
       width: 100%;
       padding: 10px;
       border-radius: 5px;
-      border: 1px solid #444;
-      background-color: #222;
-      color: #fff;
+      border: 1px solid var(--input-border);
+      background-color: var(--input-bg);
+      color: var(--text-color);
     }
 
     .contact-info {
@@ -280,16 +344,29 @@
       margin-bottom: 5px;
     }
 
+    .info-item p {
+      color: var(--text-color);
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
+        padding: 10px;
       }
-      nav ul {
-        margin-top: 10px;
+      .nav-container {
+        flex-direction: column;
+        margin-top: 8px;
+        gap: 8px;
+      }
+      nav ul li {
+        margin: 0 8px;
       }
       #home h1 {
         font-size: 2rem;
+      }
+      .section {
+        padding-top: 130px;
       }
     }
   </style>
@@ -298,42 +375,54 @@
 
   <!-- HEADER / NAVIGATION BAR -->
   <header>
-    <div class="logo">✂️ रॉयल कट सैलून</div>
-    <nav>
-      <ul>
-        <li><a href="#home">होम</a></li>
-        <li><a href="#services">सर्विसेज व रेट</a></li>
-        <li><a href="#gallery">गैलरी</a></li>
-        <li><a href="#booking">बुकिंग व संपर्क</a></li>
-      </ul>
-    </nav>
+    <div class="logo" data-hi="✂️ रॉयल कट सैलून" data-en="✂️ Royal Cut Salon">✂️ रॉयल कट सैलून</div>
+    
+    <div class="nav-container">
+      <nav>
+        <ul>
+          <li><a href="#home" data-hi="होम" data-en="Home">होम</a></li>
+          <li><a href="#services" data-hi="सर्विसेज व रेट" data-en="Services">सर्विसेज व रेट</a></li>
+          <li><a href="#gallery" data-hi="गैलरी" data-en="Gallery">गैलरी</a></li>
+          <li><a href="#booking" data-hi="बुकिंग व संपर्क" data-en="Booking & Contact">बुकिंग व संपर्क</a></li>
+        </ul>
+      </nav>
+
+      <!-- नेवबार में बटन -->
+      <div class="nav-controls">
+        <button id="lang-btn" class="nav-btn" onclick="toggleLanguage()">EN</button>
+        <button id="theme-btn" class="nav-btn" onclick="toggleTheme()">☀️ Mode</button>
+      </div>
+    </div>
   </header>
 
   <!-- PAGE 1: HOME PAGE -->
   <section id="home" class="section">
-    <h1> ग्राम उहर का आधुनिक सैलून</h1>
-    <p>बिना इंतज़ार किए पाएं अपना पसंदीदा हेयर स्टाइल। ऑनलाइन स्लॉट बुक करें और सीधा अपनी बारी पर पहुँचें।</p>
-    <a href="#booking" class="btn">अभी स्लॉट बुक करें</a>
+    <h1 data-hi="ग्राम उहर का आधुनिक सैलून" data-en="Modern Salon of Village Uhar">ग्राम उहर का आधुनिक सैलून</h1>
+    <p data-hi="बिना इंतज़ार किए पाएं अपना पसंदीदा हेयर स्टाइल। ऑनलाइन स्लॉट बुक करें और सीधा अपनी बारी पर पहुँचें।"
+       data-en="Get your favorite hairstyle without waiting. Book online slot and arrive directly at your turn.">
+      बिना इंतज़ार किए पाएं अपना पसंदीदा हेयर स्टाइल। ऑनलाइन स्लॉट बुक करें और सीधा अपनी बारी पर पहुँचें।
+    </p>
+    <a href="#booking" class="btn" data-hi="अभी स्लॉट बुक करें" data-en="Book Slot Now">अभी स्लॉट बुक करें</a>
 
     <div class="features">
       <div class="feature-card">
-        <h3>⏱️ शून्य इंतज़ार</h3>
-        <p>बुक किए गए समय पर सीधी एंट्री, दुकान पर फालतू बैठना बंद।</p>
+        <h3 data-hi="⏱️ शून्य इंतज़ार" data-en="⏱️ Zero Waiting">⏱️ शून्य इंतज़ार</h3>
+        <p data-hi="बुक किए गए समय पर सीधी एंट्री, दुकान पर फालतू बैठना बंद।" data-en="Direct entry at booked time, no unnecessary waiting.">बुक किए गए समय पर सीधी एंट्री, दुकान पर फालतू बैठना बंद।</p>
       </div>
       <div class="feature-card">
-        <h3>✂️ एक्सपर्ट स्टाइलिस</h3>
-        <p>हर प्रकार की ट्रेंडी कटिंग और बियर्ड शेपिंग के विशेषज्ञ।</p>
+        <h3 data-hi="✂️ एक्सपर्ट स्टाइलिस" data-en="✂️ Expert Stylist">✂️ एक्सपर्ट स्टाइलिस</h3>
+        <p data-hi="हर प्रकार की ट्रेंडी कटिंग और बियर्ड शेपिंग के विशेषज्ञ।" data-en="Specialists in all trendy haircuts and beard shaping.">हर प्रकार की ट्रेंडी कटिंग और बियर्ड शेपिंग के विशेषज्ञ।</p>
       </div>
       <div class="feature-card">
-        <h3>🧼 पूर्ण हाइजीन</h3>
-        <p>साफ़ टॉवल, सैनिटाइज्ड औजार और AC वेटिंग लाउंज।</p>
+        <h3 data-hi="🧼 पूर्ण हाइजीन" data-en="🧼 Pure Hygiene">🧼 पूर्ण हाइजीन</h3>
+        <p data-hi="साफ़ टॉवल, सैनिटाइज्ड औजार और AC वेटिंग लाउंज।" data-en="Clean towels, sanitized tools and AC waiting lounge.">साफ़ टॉवल, सैनिटाइज्ड औजार और AC वेटिंग लाउंज।</p>
       </div>
     </div>
   </section>
 
   <!-- PAGE 2: SERVICES & PRICING PAGE -->
   <section id="services" class="section">
-    <h2 class="section-title">हमारी सर्विसेज और रेट</h2>
+    <h2 class="section-title" data-hi="हमारी सर्विसेज और रेट" data-en="Our Services & Rates">हमारी सर्विसेज और रेट</h2>
     
     <div class="services-grid">
       <!-- Service 1 -->
@@ -341,10 +430,10 @@
         <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=500&q=80" alt="Haircut">
         <div class="service-info">
           <div class="service-header">
-            <span class="service-name">ट्रेंडी हेयरकट</span>
+            <span class="service-name" data-hi="ट्रेंडी हेयरकट" data-en="Trendy Haircut">ट्रेंडी हेयरकट</span>
             <span class="service-price">₹100</span>
           </div>
-          <p class="service-desc">आपकी पसंद की स्टाइलिंग + हेयर वॉश और हेड मसाज शामिल। (20 मिनट)</p>
+          <p class="service-desc" data-hi="आपकी पसंद की स्टाइलिंग + हेयर वॉश और हेड मसाज शामिल। (20 मिनट)" data-en="Styling of your choice + Hair wash and head massage included. (20 mins)">आपकी पसंद की स्टाइलिंग + हेयर वॉश और हेड मसाज शामिल। (20 मिनट)</p>
         </div>
       </div>
 
@@ -353,10 +442,10 @@
         <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=500&q=80" alt="Beard Shaping">
         <div class="service-info">
           <div class="service-header">
-            <span class="service-name">बियर्ड सेट व ट्रिम</span>
+            <span class="service-name" data-hi="बियर्ड सेट व ट्रिम" data-en="Beard Set & Trim">बियर्ड सेट व ट्रिम</span>
             <span class="service-price">₹50</span>
           </div>
-          <p class="service-desc">शार्प लाइनिंग बियर्ड कट, हॉट टॉवल ट्रीटमेंट के साथ। (15 मिनट)</p>
+          <p class="service-desc" data-hi="शार्प लाइनिंग बियर्ड कट, हॉट टॉवल ट्रीटमेंट के साथ। (15 मिनट)" data-en="Sharp lining beard cut with hot towel treatment. (15 mins)">शार्प लाइनिंग बियर्ड कट, हॉट टॉवल ट्रीटमेंट के साथ। (15 मिनट)</p>
         </div>
       </div>
 
@@ -365,10 +454,10 @@
         <img src="https://images.unsplash.com/photo-1512290900673-7002fffe935a?auto=format&fit=crop&w=500&q=80" alt="Facial">
         <div class="service-info">
           <div class="service-header">
-            <span class="service-name">गोल्ड फेशियल व डिटैन</span>
+            <span class="service-name" data-hi="गोल्ड फेशियल व डिटैन" data-en="Gold Facial & De-tan">गोल्ड फेशियल व डिटैन</span>
             <span class="service-price">₹250</span>
           </div>
-          <p class="service-desc">चेहरे की डीप क्लीनिंग, डार्क स्पॉट्स हटाने के लिए बेस्ट ग्लो फेशियल। (30 मिनट)</p>
+          <p class="service-desc" data-hi="चेहरे की डीप क्लीनिंग, डार्क स्पॉट्स हटाने के लिए बेस्ट ग्लो फेशियल। (30 मिनट)" data-en="Deep face cleaning, best glow facial for dark spot removal. (30 mins)">चेहरे की डीप क्लीनिंग, डार्क स्पॉट्स हटाने के लिए बेस्ट ग्लो फेशियल। (30 मिनट)</p>
         </div>
       </div>
 
@@ -377,10 +466,10 @@
         <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=500&q=80" alt="Combo Pack">
         <div class="service-info">
           <div class="service-header">
-            <span class="service-name">रॉयल कॉम्बो (All-in-One)</span>
+            <span class="service-name" data-hi="रॉयल कॉम्बो (All-in-One)" data-en="Royal Combo (All-in-One)">रॉयल कॉम्बो (All-in-One)</span>
             <span class="service-price">₹350</span>
           </div>
-          <p class="service-desc">हेयरकट + बियर्ड + फेशियल + हेयर स्पा पैकेज। (60 मिनट)</p>
+          <p class="service-desc" data-hi="हेयरकट + बियर्ड + फेशियल + हेयर स्पा पैकेज। (60 मिनट)" data-en="Haircut + Beard + Facial + Hair Spa package. (60 mins)">हेयरकट + बियर्ड + फेशियल + हेयर स्पा पैकेज। (60 मिनट)</p>
         </div>
       </div>
     </div>
@@ -388,49 +477,49 @@
 
   <!-- PAGE 3: GALLERY PAGE -->
   <section id="gallery" class="section">
-    <h2 class="section-title">गैलरी (हमारा काम)</h2>
+    <h2 class="section-title" data-hi="गैलरी (हमारा काम)" data-en="Gallery (Our Work)">गैलरी (हमारा काम)</h2>
     
     <div class="gallery-grid">
       <div class="gallery-item">
         <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=500&q=80" alt="Fade Cut">
-        <div class="gallery-caption">स्किन फेडेड स्टाइल</div>
+        <div class="gallery-caption" data-hi="स्किन फेडेड स्टाइल" data-en="Skin Fade Style">स्किन फेडेड स्टाइल</div>
       </div>
       <div class="gallery-item">
         <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=500&q=80" alt="Beard Design">
-        <div class="gallery-caption">शार्प बियर्ड शेप</div>
+        <div class="gallery-caption" data-hi="शार्प बियर्ड शेप" data-en="Sharp Beard Shape">शार्प बियर्ड शेप</div>
       </div>
       <div class="gallery-item">
         <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="Salon Interior">
-        <div class="gallery-caption">सैलून का अंदर का माहौल</div>
+        <div class="gallery-caption" data-hi="सैलून का अंदर का माहौल" data-en="Salon Interior Ambience">सैलून का अंदर का माहौल</div>
       </div>
       <div class="gallery-item">
         <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=500&q=80" alt="Hair Treatment">
-        <div class="gallery-caption">हेयर ट्रीटमेंट व स्पा</div>
+        <div class="gallery-caption" data-hi="हेयर ट्रीटमेंट व स्पा" data-en="Hair Treatment & Spa">हेयर ट्रीटमेंट व स्पा</div>
       </div>
     </div>
   </section>
 
   <!-- PAGE 4: BOOKING & CONTACT PAGE -->
   <section id="booking" class="section">
-    <h2 class="section-title">ऑनलाइन बुकिंग व संपर्क</h2>
+    <h2 class="section-title" data-hi="ऑनलाइन बुकिंग व संपर्क" data-en="Online Booking & Contact">ऑनलाइन बुकिंग व संपर्क</h2>
 
     <div class="booking-container">
       <!-- Appointment Form -->
       <form class="booking-form" id="appointmentForm">
-        <h3 style="margin-bottom: 15px; color: var(--primary-color);">समय बुक करें</h3>
+        <h3 style="margin-bottom: 15px; color: var(--primary-color);" data-hi="समय बुक करें" data-en="Book Time Slot">समय बुक करें</h3>
         
         <div class="form-group">
-          <label for="name">आपका नाम:</label>
+          <label for="name" data-hi="आपका नाम:" data-en="Your Name:">आपका नाम:</label>
           <input type="text" id="name" placeholder="नाम लिखें" required>
         </div>
 
         <div class="form-group">
-          <label for="phone">मोबाइल नंबर:</label>
+          <label for="phone" data-hi="मोबाइल नंबर:" data-en="Mobile Number:">मोबाइल नंबर:</label>
           <input type="tel" id="phone" placeholder="10 अंकों का नंबर" required>
         </div>
 
         <div class="form-group">
-          <label for="service">सर्विस चुनें:</label>
+          <label for="service" data-hi="सर्विस चुनें:" data-en="Select Service:">सर्विस चुनें:</label>
           <select id="service">
             <option value="Haircut">ट्रेंडी हेयरकट (₹100)</option>
             <option value="Beard">बियर्ड सेट व ट्रिम (₹50)</option>
@@ -440,12 +529,12 @@
         </div>
 
         <div class="form-group">
-          <label for="date">तारीख चुनें:</label>
+          <label for="date" data-hi="तारीख चुनें:" data-en="Select Date:">तारीख चुनें:</label>
           <input type="date" id="date" required>
         </div>
 
         <div class="form-group">
-          <label for="time">टाइम स्लॉट चुनें:</label>
+          <label for="time" data-hi="टाइम स्लॉट चुनें:" data-en="Select Time Slot:">टाइम स्लॉट चुनें:</label>
           <select id="time">
             <option value="10:00 AM">10:00 AM - 10:30 AM</option>
             <option value="11:00 AM">11:00 AM - 11:30 AM</option>
@@ -455,24 +544,24 @@
           </select>
         </div>
 
-        <button type="submit" class="btn" style="width: 100%;">कंफर्म बुकिंग</button>
+        <button type="submit" class="btn" style="width: 100%;" data-hi="कंफर्म बुकिंग" data-en="Confirm Booking">कंफर्म बुकिंग</button>
       </form>
 
       <!-- Contact Info -->
       <div class="contact-info">
         <div class="info-item">
-          <h4>📍 पता:</h4>
-          <p>ग्राम उहर, पंजाब नेशनल बैंक के पास तहसील गंज बासौदा (म.प्र.)</p>
+          <h4 data-hi="📍 पता:" data-en="📍 Address:">📍 पता:</h4>
+          <p data-hi="ग्राम उहर, पंजाब नेशनल बैंक के पास तहसील गंज बासौदा (म.प्र.)" data-en="Village Uhar, Near Punjab National Bank, Tehsil Ganj Basoda (M.P.)">ग्राम उहर, पंजाब नेशनल बैंक के पास तहसील गंज बासौदा (म.प्र.)</p>
         </div>
 
         <div class="info-item">
-          <h4>⏰ दुकान की टाइमिंग:</h4>
-          <p>सोमवार - रविवार: सुबह 9:00 AM से रात 8:30 PM</p>
-          <p style="color: #ff5555;">(मंगलवार हाफ-डे: दोपहर 2:00 बजे तक)</p>
+          <h4 data-hi="⏰ दुकान की टाइमिंग:" data-en="⏰ Shop Timing:">⏰ दुकान की टाइमिंग:</h4>
+          <p data-hi="सोमवार - रविवार: सुबह 9:00 AM से रात 8:30 PM" data-en="Monday - Sunday: 9:00 AM to 8:30 PM">सोमवार - रविवार: सुबह 9:00 AM से रात 8:30 PM</p>
+          <p style="color: #ff5555;" data-hi="(मंगलवार हाफ-डे: दोपहर 2:00 बजे तक)" data-en="(Tuesday Half-Day: Till 2:00 PM)">(मंगलवार हाफ-डे: दोपहर 2:00 बजे तक)</p>
         </div>
 
         <div class="info-item">
-          <h4>📞 संपर्क:</h4>
+          <h4 data-hi="📞 संपर्क:" data-en="📞 Contact:">📞 संपर्क:</h4>
           <p>फ़ोन: +91 8815488939</p>
           <p>व्हाट्सएप: +91 9926330796</p>
         </div>
@@ -482,134 +571,49 @@
 
   <!-- JAVASCRIPT CODE -->
   <script>
-    // 1. फॉर्म सबमिशन को हैंडल करना और WhatsApp पर मैसेज भेजना
+    // ------------------------------------
+    // 1. हिंदी/इंग्लिश भाषा लॉजिक
+    // ------------------------------------
+    let currentLang = localStorage.getItem('language') || 'hi';
+
+    function applyLanguage(lang) {
+      const translatableElements = document.querySelectorAll('[data-hi][data-en]');
+      translatableElements.forEach(el => {
+        el.innerText = el.getAttribute(`data-${lang}`);
+      });
+
+      const langBtn = document.getElementById('lang-btn');
+      if (langBtn) {
+        langBtn.innerText = lang === 'hi' ? 'EN' : 'हिंदी';
+      }
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'hi' ? 'en' : 'hi';
+      localStorage.setItem('language', currentLang);
+      applyLanguage(currentLang);
+    }
+
+    // ------------------------------------
+    // 2. डार्क / लाइट मोड टॉगल लॉजिक
+    // ------------------------------------
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      
+      const themeBtn = document.getElementById('theme-btn');
+      if (themeBtn) {
+        themeBtn.innerText = isLight ? '🌙 Mode' : '☀️ Mode';
+      }
+    }
+
+    // ------------------------------------
+    // 3. व्हाट्सएप सबमिशन व पेज लोड लॉजिक
+    // ------------------------------------
     document.getElementById('appointmentForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // इनपुट वैल्यू लेना
       const name = document.getElementById('name').value;
       const phone = document.getElementById('phone').value;
-      const service = document.getElementById('service').value;
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-
-      // दुकान का व्हाट्सएप नंबर (यहाँ अपना नंबर डालें)
-      const salonWhatsAppNumber = "9926330796"; 
-
-      // व्हाट्सएप पर भेजने वाला मैसेज टेक्स्ट
-      const message = `नमस्ते! नई ऑनलाइन बुकिंग आई है:%0A` +
-                      `👤 नाम: ${name}%0A` +
-                      `📞 फोन: ${phone}%0A` +
-                      `✂️ सर्विस: ${service}%0A` +
-                      `📅 तारीख: ${date}%0A` +
-                      `⏰ समय: ${time}`;
-
-      // व्हाट्सएप लिंक जनरेट करना
-      const whatsappURL = `https://wa.me/${salonWhatsAppNumber}?text=${message}`;
-
-      // यूजर को अलर्ट दिखाना और व्हाट्सएप पर रिडायरेक्ट करना
-      alert('धन्यवाद! आपकी बुकिंग का विवरण व्हाट्सएप पर भेजा जा रहा है।');
-      window.open(whatsappURL, '_blank');
-    });
-
-    // 2. आज की तारीख से पुरानी तारीख सेलेक्ट न होने देना
-    const dateInput = document.getElementById('date');
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
-  </script>
-<!-- ================= संपूर्ण डार्क / लाइट मोड कोड ================= -->
-<style>
-  /* पूरे पेज का बैकग्राउंड और टेक्स्ट */
-  body.light-mode {
-    background-color: #f4f6f9 !important;
-    color: #111111 !important;
-  }
-
-  /* सेक्शन्स, हेडर, नेविगेशन, फूटर */
-  body.light-mode header,
-  body.light-mode nav,
-  body.light-mode section,
-  body.light-mode footer,
-  body.light-mode div {
-    background-color: #ffffff !important;
-  }
-
-  /* कार्ड्स और बॉक्सेस */
-  body.light-mode .card,
-  body.light-mode .service-card,
-  body.light-mode .feature-card,
-  body.light-mode [class*="card"],
-  body.light-mode [class*="box"] {
-    background-color: #f8f9fa !important;
-    border-color: #dddddd !important;
-  }
-
-  /* सभी प्रकार का टेक्स्ट (हेडिंग, पैराग्राफ, लेबल्स) */
-  body.light-mode h1,
-  body.light-mode h2,
-  body.light-mode h3,
-  body.light-mode h4,
-  body.light-mode h5,
-  body.light-mode h6,
-  body.light-mode p,
-  body.light-mode span,
-  body.light-mode a,
-  body.light-mode label,
-  body.light-mode li {
-    color: #111111 !important;
-  }
-
-  /* फॉर्म, इनपुट बॉक्स, सेलेक्ट बॉक्स */
-  body.light-mode input,
-  body.light-mode select,
-  body.light-mode textarea {
-    background-color: #ffffff !important;
-    color: #111111 !important;
-    border: 1px solid #cccccc !important;
-  }
-
-  /* मोड बटन की स्टाइल */
-  .theme-toggle-btn {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 99999;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 20px;
-    border: 2px solid #e0b973;
-    background: #111111;
-    color: #ffffff;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  }
-
-  body.light-mode .theme-toggle-btn {
-    background: #ffffff !important;
-    color: #111111 !important;
-  }
-</style>
-
-<!-- टॉगल बटन -->
-<button class="theme-toggle-btn" onclick="toggleTheme()">🌙 / ☀️ मोड</button>
-
-<!-- जावास्क्रिप्ट लॉजिक -->
-<script>
-  function toggleTheme() {
-    document.body.classList.toggle('light-mode');
-    if (document.body.classList.contains('light-mode')) {
-      localStorage.setItem('theme', 'light');
-    } else {
-      localStorage.setItem('theme', 'dark');
-    }
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('theme') === 'light') {
-      document.body.classList.add('light-mode');
-    }
-  });
-</script>
-<!-- ======================================================== -->
-</body>
-</html>
+      const se
