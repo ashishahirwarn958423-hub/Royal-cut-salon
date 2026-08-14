@@ -518,5 +518,59 @@
     dateInput.setAttribute('min', today);
   </script>
 
+<!-- ================= डार्क / लाइट मोड कोड ================= -->
+<style>
+  /* लाइट मोड के कलर्स */
+  body.light-mode {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+  }
+  body.light-mode .card,
+  body.light-mode section,
+  body.light-mode div {
+    background-color: #f8f9fa !important;
+    color: #1a1a1a !important;
+  }
+  /* बटन की स्टाइल (स्क्रीन के ऊपर दाएं कोने में दिखेगा) */
+  .theme-toggle-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 1px solid #e0b973;
+    background: #222222;
+    color: #ffffff;
+    font-size: 14px;
+  }
+  body.light-mode .theme-toggle-btn {
+    background: #ffffff;
+    color: #222222;
+  }
+</style>
+
+<!-- बटन -->
+<button class="theme-toggle-btn" onclick="toggleTheme()">🌙 / ☀️ मोड</button>
+
+<!-- जावास्क्रिप्ट लॉजिक -->
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    if (document.body.classList.contains('light-mode')) {
+      localStorage.setItem('theme', 'light');
+    } else {
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+    }
+  });
+</script>
+<!-- ======================================================== -->
 </body>
 </html>
